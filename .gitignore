@@ -10,6 +10,8 @@ __pycache__/
 */migrations/*.py
 */migrations/*.pyc
 
+/frontend/political_scale/node_modules
+
 # Ignore the SQLite database
 db.sqlite3
 db.sqlite3-journal
