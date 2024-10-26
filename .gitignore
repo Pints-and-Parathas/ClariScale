@@ -36,3 +36,25 @@ db.sqlite3-journal
 
 # Ignore macOS system files
 .DS_Store
+
+# dependencies
+/frontend/political_scale/node_modules
+/frontend/political_scale/.pnp
+/frontend/political_scale/.pnp.js
+
+# testing
+/frontend/political_scale/coverage
+
+# production
+/frontend/political_scale/build
+
+# misc
+/frontend/political_scale/.DS_Store
+/frontend/political_scale/.env.local
+/frontend/political_scale/.env.development.local
+/frontend/political_scale/.env.test.local
+/frontend/political_scale/.env.production.local
+
+/frontend/political_scale/npm-debug.log*
+/frontend/political_scale/yarn-debug.log*
+/frontend/political_scale/yarn-error.log*
