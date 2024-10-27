@@ -1,5 +1,4 @@
 import google.generativeai as genai
-import requests
 import os
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")

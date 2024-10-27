@@ -20,5 +20,5 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('prompt-api/', views.my_view, name='prompt_api')
+    path('prompt-api/', views.prompt_api_view, name='prompt_api'),
 ]
