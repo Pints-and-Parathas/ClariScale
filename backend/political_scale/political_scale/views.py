@@ -29,4 +29,4 @@ def submit_webpage(request):
                 "message": str(e)
             }, status=400)
 
-    return HttpResponse("Boner fart", content_type='text/plain')
+    return HttpResponse("This endpoint only accepts POST requests", content_type='text/plain')

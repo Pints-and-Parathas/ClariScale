@@ -18,7 +18,6 @@ def get_data_from_prompt_api():
 def fetch_article_data(url):
     pageHTML = requests.get(url)
     pageHTML.raise_for_status()
-
     model = genai.GenerativeModel("gemini-1.5-flash")
     prompt = f"""Using this html: {pageHTML.text}
                 Extract information about the article, disregard anything that is an advert or a link to another article.
