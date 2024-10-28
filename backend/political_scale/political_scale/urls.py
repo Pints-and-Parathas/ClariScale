@@ -21,5 +21,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('prompt-api/', views.prompt_api_view, name='prompt_api'),
-    path('submit-article/', views.submit_webpage, name='submit_webpage')
+    path('submit-article/', views.submit_webpage, name='submit_webpage'),
+    path('sentiment-api/', views.sentiment_api_view, name='sentiment_api'),
 ]

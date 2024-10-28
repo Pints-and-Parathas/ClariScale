@@ -39,3 +39,11 @@ def fetch_article_data(url):
         responseJson = {"error": str(e)}
     
     return JsonResponse(responseJson)
+
+def get_data_from_sentiment_api():
+    prompt = """Tell me whether the following sentence's sentiment is positive or negative or something in between.
+    Sentence Mint chocolate chip ice cream is da best.
+    """
+    model = genai.GenerativeModel("gemini-1.5-flash")
+    response = model.generate_content(prompt)
+    return response.text
