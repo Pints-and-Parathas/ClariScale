@@ -1,13 +1,14 @@
-import React from 'react'
-import { PopupContainer, PopupText } from './StyledComponents';
+import React, {useState } from 'react'
+import { PopupContainer} from './StyledComponents';
+import SlidingScale from './SlidingScale';
 
-const PopUp = ({isArticle}) => {
-    //If user not on article then no pop up
+const PopUp = ({isArticle, category, value}) => {
+     //If user not on article then no pop up
     if(!isArticle) return null;
 
     return(
         <PopupContainer>
-            <PopupText>This is an article.fr.</PopupText>
+            <SlidingScale category={category} value = {value} />
         </PopupContainer>
     );
 };
