@@ -51,7 +51,7 @@ def get_data_from_sentiment_api():
 
 
 def analyse_text(article_text):
-    prompt = """"Analyze the following article to identify its key themes. Consider themes related to
+    prompt = f""""Using this text: {article_text} Analyze the article to identify its key themes. Consider themes related to
     social, economic, cultural, and geopolitical issues, including international conflicts, humanitarian concerns,
     and socio-political ideologies. Classify the article's political alignment as 'left-wing,' 'right-wing,' or 'neutral' based on the following guidance:
 
@@ -66,7 +66,7 @@ def analyse_text(article_text):
     If the article does not clearly indicate a left or right alignment, classify it as 'neutral.'
 
     Provide the output in the following JSON structure:
-    {
+    {{
         "themes": [
             {
                 "theme": "Description of Theme 1",
@@ -80,6 +80,6 @@ def analyse_text(article_text):
             }
         ],
         "overall_alignment": "Overall classification of the article as left-wing / right-wing / neutral based on predominant themes"
-    }
-      """
+    }}
+    Do not include any other text or characters in your response other than valid JSON"""
 
