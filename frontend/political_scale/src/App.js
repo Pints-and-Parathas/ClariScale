@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import PopUp from './components/PopUp'
+import PopUp from './popUp/PopUp.component';
 import GlobalStyle from './styles/GlobalStyle';
 
 const apiResponse = true;
