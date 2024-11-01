@@ -35,28 +35,26 @@ def fetch_article_data(url):
     response = model.generate_content(prompt)
     
     try:
-        responseJson = json.loads(response.text)
-        outlet = responseJson.get("outlet", "unknown outlet")
-        outletJson = json.loads(get_outlet_details(outlet))
+        response_json = json.loads(response.text)
+        outlet = response_json.get("outlet", "unknown outlet")
+        outlet_json = json.loads(get_outlet_details(outlet))
 
         merged_data = {
-            "author": responseJson.get("author", ""),
-            "title": responseJson.get("title", ""),
-            "text": responseJson.get("text", ""),
-            "publish_date": responseJson.get("publish_date", "")
+            "author": response_json.get("author", ""),
+            "title": response_json.get("title", ""),
+            "text": response_json.get("text", ""),
+            "publish_date": response_json.get("publish_date", "")
         }
         
         # Embed each question inside the main structure
-        for question_key, question_value in outletJson.items():  # Use .items() to iterate over dict
+        for question_key, question_value in outlet_json.items():  # Use .items() to iterate over dict
             merged_data[question_key] = {
                 "summary": question_value.get("summary", ""),
                 "score": question_value.get("score", 0)
             }
-        #combinedJson = {**responseJson, **get_outlet_details(outlet)}
-        print(get_outlet_details(outlet))
     except json.JSONDecodeError as e:
         print("error " + str(e))
-        combinedJson = {"error": str(e)}
+        merged_data = {"error": str(e)}
     
     return JsonResponse(merged_data)
 
