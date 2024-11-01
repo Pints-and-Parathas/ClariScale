@@ -1,5 +1,5 @@
 import React from 'react'
-import { PopupContainer, PopupText } from './StyledComponents';
+import { PopupContainer,PopupText } from './PopUp.styled';
 
 const PopUp = ({isArticle}) => {
     //If user not on article then no pop up
