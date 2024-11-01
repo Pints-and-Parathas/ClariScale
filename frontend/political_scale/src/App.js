@@ -3,16 +3,17 @@ import PopUp from './popUp/PopUp.component';
 import GlobalStyle from './styles/GlobalStyle';
 
 const apiResponse = true;
+const category = "Yo this dude!";
+const value = 30;
 
-function App(){
-  const [isArticle, setisArticle] = useState(apiResponse);
-
+const App = () => {
+  const [isArticle, setIsArticle] = useState(apiResponse);
 
   return (
     <>
       <GlobalStyle /> {/* Apply global styles */}
       <div className="App">
-        <PopUp isArticle={isArticle} />
+        <PopUp isArticle={isArticle} category={category} value={value}/>
       </div>
     </>
   );
