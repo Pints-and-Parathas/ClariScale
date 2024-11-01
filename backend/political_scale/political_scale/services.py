@@ -45,6 +45,41 @@ def get_data_from_sentiment_api():
     prompt = """Tell me whether the following sentence's sentiment is positive or negative or something in between.
     Sentence Mint chocolate chip ice cream is da best.
     """
-    model = genai.GenerativeModel("gemini-1.5-flash")
+
     response = model.generate_content(prompt)
     return response.text
+
+
+def analyse_text(article_text):
+    prompt = """"Analyze the following article to identify its key themes. Consider themes related to
+    social, economic, cultural, and geopolitical issues, including international conflicts, humanitarian concerns,
+    and socio-political ideologies. Classify the article's political alignment as 'left-wing,' 'right-wing,' or 'neutral' based on the following guidance:
+
+    Left-Wing: Emphasis on social equality, government intervention, progressive policies, support for minority rights, diplomacy in foreign policy, 
+    environmentalism, social welfare, humanitarian aid, and advocacy for international cooperation.
+    Right-Wing: Focus on individual rights, economic liberalization, reduced government intervention, traditional values, national sovereignty,
+    defense policies, prioritization of national interests in foreign policy, and support for market-based solutions.
+    When assessing politically polarized issues (e.g., international conflicts, cultural debates, environmental regulations):
+
+    Note if the article promotes diplomatic or cooperative solutions, human rights, and global partnerships (often associated with left-wing perspectives).
+    Alternatively, note if the article emphasizes national security, economic self-interest, traditional alliances, or a defensive posture (often associated with right-wing perspectives).
+    If the article does not clearly indicate a left or right alignment, classify it as 'neutral.'
+
+    Provide the output in the following JSON structure:
+    {
+        "themes": [
+            {
+                "theme": "Description of Theme 1",
+                "political_alignment": "left-wing / right-wing / neutral",
+                "reasoning": "Explanation of why this theme is classified in this way."
+            },
+            {
+                "theme": "Description of Theme 2",
+                "political_alignment": "left-wing / right-wing / neutral",
+                "reasoning": "Explanation of why this theme is classified in this way."
+            }
+        ],
+        "overall_alignment": "Overall classification of the article as left-wing / right-wing / neutral based on predominant themes"
+    }
+      """
+
