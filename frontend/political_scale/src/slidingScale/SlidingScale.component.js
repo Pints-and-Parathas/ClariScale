@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
-import { SlidingScaleContainer, SlidingScaleLabel, SlidingScaleInput, Tooltip } from './StyledComponents'
+import { SlidingScaleContainer, SlidingScaleInput, SlidingScaleLabel, Tooltip } from './SlidingScale.styled'; 
 
 const SlidingScale = ({category, value}) => {
     const [isHovered, setIsHovered] = useState(true);
 
-    const sliderWidth = 100; // Assuming the width of the slider in percentage (for example)
-    const thumbWidth = 0; // Width of the thumb (you can adjust this if your thumb width is different)
-    const position = ((value) / 87) * (sliderWidth - thumbWidth); // Calculate position based on value
+    const sliderWidth = 100; // Width of the slider in percentage or pixels (adjust as needed)
+    const thumbWidth = 20;   // Width of the thumb (adjust based on your actual thumb size)
+    const maxValue = 100;     // The maximum value of the slider
+    
+    const position = (value / maxValue) * (sliderWidth - thumbWidth) + thumbWidth / 2; // Adjust position to center the label
+    
 
     return(
         <SlidingScaleContainer
