@@ -72,5 +72,4 @@ def get_text_analysis(article_text):
 
     response = model.generate_content(prompt)
 
-    print(response.text)
     return response.text
