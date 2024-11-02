@@ -7,9 +7,9 @@ export const PopupContainer = styled.div`
   right: 0px;
   width: 250px;
   padding: 20px;
-  background-color: var(--background); /* Use CSS variable for background */
-  color: var(--color); /* Use CSS variable for text color */
-  box-shadow: var(--shadow); /* Use CSS variable for shadow */
+  background-color: ${(props) => props.theme.background}; /* Use theme for background */
+  color: ${(props) => props.theme.color}; /* Use theme for text color */
+  box-shadow: ${(props) => props.theme.shadow}; 
   border-radius: 10px;
   z-index: 1000;
 `;

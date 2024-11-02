@@ -39,7 +39,8 @@ export const SlidingScaleInput = styled.input.attrs({ type: 'range' })`
     height: 0px;
     border-left: 10px solid transparent; /* Left side of the triangle */
     border-right: 10px solid transparent; /* Right side of the triangle */
-    border-bottom: 15px solid #ffffff; /* Bottom color of the triangle (thumb) */
+    border-bottom: 15px solid ${(props) => props.theme.thumbColor}; /* Bottom color of the triangle (thumb) */
+
     cursor: pointer;
     transform: translateY(4px); /* Adjust positioning to center the triangle */
   }
