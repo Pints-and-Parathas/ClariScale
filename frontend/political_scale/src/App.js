@@ -3,7 +3,7 @@ import PopUp from './popUp/PopUp.component';
 import GlobalStyle from './styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeToggle/Theme';
-import ThemeToggle from './themeToggle/ThemeToggle.component';
+
 
 const apiResponse = true;
 const category = "Yo this dude!";
