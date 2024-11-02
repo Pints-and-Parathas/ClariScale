@@ -83,3 +83,6 @@ def analyse_text(article_text):
     }}
     Do not include any other text or characters in your response other than valid JSON"""
 
+    response = model.generate_content(prompt)
+
+    return response.text
