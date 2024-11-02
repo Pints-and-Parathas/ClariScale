@@ -13,18 +13,26 @@ def join_json(json_object_1, json_object_2, fields):
     """
 
     for object_2_key, object_2_value in json_object_2.items():
-        # Check if object_2_value is a list of dictionaries
-        if isinstance(object_2_value, list) and all(isinstance(item, dict) for item in object_2_value):
-            # Only include fields present in each dictionary of the list
+        # If the value is a dictionary (like outlet_info), process each inner dictionary
+        if isinstance(object_2_value, dict):
+            # Create a new dictionary to hold merged fields for this key
+            merged_fields = {}
+            for inner_key, inner_value in object_2_value.items():
+                # If inner_value is a dictionary, create a filtered dictionary with only the specified fields
+                if isinstance(inner_value, dict):
+                    merged_fields[inner_key] = {
+                        field: inner_value.get(field, None) for field in fields if field in inner_value
+                    }
+                # For non-dictionary values, copy the value directly
+                else:
+                    merged_fields[inner_key] = inner_value
+            # Add the merged fields under the parent key
+            json_object_1[object_2_key] = merged_fields
+        # Handle lists of dictionaries as before
+        elif isinstance(object_2_value, list) and all(isinstance(item, dict) for item in object_2_value):
             json_object_1[object_2_key] = [
                 {field: item[field] for field in fields if field in item} for item in object_2_value
             ]
-        # If it's a dictionary, create a filtered dictionary with only the specified fields
-        elif isinstance(object_2_value, dict):
-            json_object_1[object_2_key] = {
-                field: object_2_value.get(field, None) for field in fields if field in object_2_value
-            }
-        # For non-dictionary values (e.g., strings), copy the value directly
         else:
             json_object_1[object_2_key] = object_2_value
 

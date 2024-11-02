@@ -48,17 +48,32 @@ OUTLET_DETAILS_PROMPT = """For this publisher: {outlet_name}
                 Question 1: What is the historical political leaning of this outlet?
                 Question 2: Who owns the outlet and what are their political leanings?
                 Question 3: What historical political affiliations has the outlet held?
-                Question 4: Is the organisation owned by a parent company, and if so, how do they typically lean politically?
-                Question 5: Who did this organisation support, if anyone, in the previous election cycle, and what political leaning do they represent?
+                Question 4: Is the organization owned by a parent company, and if so, how do they typically lean politically?
+                Question 5: Who did this organization support, if anyone, in the previous election cycle, and what political leaning do they represent?
                 Provide a response using this JSON scheme: 
                 {{
-                    outlet_info : [
-                        "questionNumber":
-                            {{
-                                "summary": "str",
-                                "score": "int"
-                            }},
-                    ],
+                    "outlet_info": {{
+                        "1": {{
+                            "summary": "str",
+                            "score": "int"
+                        }},
+                        "2": {{
+                            "summary": "str",
+                            "score": "int"
+                        }},
+                        "3": {{
+                            "summary": "str",
+                            "score": "int"
+                        }},
+                        "4": {{
+                            "summary": "str",
+                            "score": "int"
+                        }},
+                        "5": {{
+                            "summary": "str",
+                            "score": "int"
+                        }}
+                    }}
                 }}
                 VERY IMPORTANT: Please provide the JSON response without any formatting or code blocks.
             """
