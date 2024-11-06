@@ -2,9 +2,14 @@ import google.generativeai as genai
 import requests
 import os
 import json
+import asyncio
+from bs4 import BeautifulSoup
 from .utils import join_json, run_async_tasks
 from django.http import JsonResponse
 from .prompts import TEXT_ANALYSIS_PROMPT, OUTLET_DETAILS_PROMPT, FETCH_ARTICLE_DATA_PROMPT
+from concurrent.futures import ThreadPoolExecutor
+
+executor = ThreadPoolExecutor(max_workers=10)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 genai.configure(api_key=GEMINI_API_KEY)
@@ -22,17 +27,13 @@ def fetch_article_data(url):
     page_html.raise_for_status()
     html_content = page_html.content.decode('utf-8')
 
-    prompt = FETCH_ARTICLE_DATA_PROMPT.format(html_content = html_content)
+    prompt = FETCH_ARTICLE_DATA_PROMPT.format(html_content = extract_article_content(html_content))
     response = model.generate_content(prompt)
-    
+
     try:
         response_json = json.loads(response.text)
         outlet = response_json.get("outlet", "unknown outlet")
-        # outlet_json = json.loads(get_outlet_details(outlet))
         article_text = response_json.get("text", "article text unavailable")
-
-        # outlet_details_task = get_outlet_details(outlet)
-        # text_analysis_task = get_text_analysis(article_text)
 
         outlet_response, article_text_response = run_async_tasks(
             get_outlet_details(outlet), get_text_analysis(article_text)
@@ -44,7 +45,6 @@ def fetch_article_data(url):
         merged_data = {
             "author": response_json.get("author", ""),
             "title": response_json.get("title", ""),
-            "text": response_json.get("text", ""),
             "publish_date": response_json.get("publish_date", ""),
         }
 
@@ -66,17 +66,31 @@ def get_data_from_sentiment_api():
     return response.text
 
 async def get_outlet_details(outlet_name):
-    model = genai.GenerativeModel("gemini-1.5-flash")
-
     prompt = OUTLET_DETAILS_PROMPT.format(outlet_name = outlet_name)
-    
-    response = model.generate_content(prompt)
+    loop = asyncio.get_running_loop()
+    response = await loop.run_in_executor(None, model.generate_content, prompt)
+
     return response.text
 
 
 async def get_text_analysis(article_text):
     prompt = TEXT_ANALYSIS_PROMPT.format(article_text = article_text)
 
-    response = model.generate_content(prompt)
+    loop = asyncio.get_running_loop()
+    response = await loop.run_in_executor(None, model.generate_content, prompt)
 
     return response.text
+
+
+def extract_article_content(html_content):
+    soup = BeautifulSoup(html_content, 'html.parser')
+
+    # Remove ads, scripts, and irrelevant tags
+    for script in soup(['script', 'style', 'aside', 'footer', 'nav']):
+        script.decompose()
+
+    # Extract the main content, like the article body
+    article_body = soup.find('article')  # or any other main article container
+    if article_body:
+        return article_body.get_text(strip=True)
+    return ""
