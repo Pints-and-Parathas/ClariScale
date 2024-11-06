@@ -2,7 +2,7 @@ import google.generativeai as genai
 import requests
 import os
 import json
-from .utils import join_json
+from .utils import join_json, run_async_tasks
 from django.http import JsonResponse
 from .prompts import TEXT_ANALYSIS_PROMPT, OUTLET_DETAILS_PROMPT, FETCH_ARTICLE_DATA_PROMPT
 
@@ -27,12 +27,19 @@ def fetch_article_data(url):
     
     try:
         response_json = json.loads(response.text)
-
         outlet = response_json.get("outlet", "unknown outlet")
-        outlet_json = json.loads(get_outlet_details(outlet))
-
+        # outlet_json = json.loads(get_outlet_details(outlet))
         article_text = response_json.get("text", "article text unavailable")
-        article_text_json = json.loads(get_text_analysis(article_text))
+
+        # outlet_details_task = get_outlet_details(outlet)
+        # text_analysis_task = get_text_analysis(article_text)
+
+        outlet_response, article_text_response = run_async_tasks(
+            get_outlet_details(outlet), get_text_analysis(article_text)
+        )
+
+        outlet_json = json.loads(outlet_response)
+        article_text_json = json.loads(article_text_response)
 
         merged_data = {
             "author": response_json.get("author", ""),
@@ -58,7 +65,7 @@ def get_data_from_sentiment_api():
     response = model.generate_content(prompt)
     return response.text
 
-def get_outlet_details(outlet_name):
+async def get_outlet_details(outlet_name):
     model = genai.GenerativeModel("gemini-1.5-flash")
 
     prompt = OUTLET_DETAILS_PROMPT.format(outlet_name = outlet_name)
@@ -67,7 +74,7 @@ def get_outlet_details(outlet_name):
     return response.text
 
 
-def get_text_analysis(article_text):
+async def get_text_analysis(article_text):
     prompt = TEXT_ANALYSIS_PROMPT.format(article_text = article_text)
 
     response = model.generate_content(prompt)
