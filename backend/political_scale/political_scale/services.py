@@ -26,7 +26,6 @@ def fetch_article_data(url):
     page_html = requests.get(url)
     page_html.raise_for_status()
     html_content = page_html.content.decode('utf-8')
-
     prompt = FETCH_ARTICLE_DATA_PROMPT.format(html_content = extract_article_content(html_content))
     response = model.generate_content(prompt)
 
@@ -93,4 +92,4 @@ def extract_article_content(html_content):
     article_body = soup.find('article')  # or any other main article container
     if article_body:
         return article_body.get_text(strip=True)
-    return ""
+    return soup.get_text(strip=True)
