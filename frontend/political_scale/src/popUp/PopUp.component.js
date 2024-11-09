@@ -16,11 +16,13 @@ const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
             <ToggleContainer>
                 <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
             </ToggleContainer>
-            <SlidingScale category={category} value={value} />
+            <SlidingScale category={category} value={value} isInsidePanel={false}/>
             <LearnMoreLink onClick={() => setIsPanelOpen(true)}>
                 Learn More
             </LearnMoreLink>
-            <SlidingPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} />
+            <SlidingPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
+                <SlidingScale category={category} value={value} isInsidePanel={true} />
+            </SlidingPanel>
         </PopupContainer>
     );
 };
