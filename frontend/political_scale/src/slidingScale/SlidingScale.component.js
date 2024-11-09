@@ -10,24 +10,31 @@ const SlidingScale = ({category, value, isInsidePanel}) => {
     
     const position = (value / maxValue) * (sliderWidth - thumbWidth) + thumbWidth / 2; // Adjust position to center the label
     
+    const tooltipPosition = isInsidePanel ? { top: '25px', left: `${position}%` } : { top: '-25px', left: `${position}%` };
+
     return(
         <SlidingScaleContainer
                 onMouseEnter={() => !isInsidePanel && setIsHovered(true)}
                 onMouseLeave={() => !isInsidePanel && setIsHovered(false)}
         >        
-            <SlidingScaleLabel>{category}</SlidingScaleLabel>
+            {!isInsidePanel && <SlidingScaleLabel>{category}</SlidingScaleLabel>}
             <SlidingScaleInput
                 value = {value}
                 disabled
             />
-            {isInsidePanel || isHovered ? (
-                <Tooltip
-                    visible={true}
-                    style={{ left: `${position}%` }}
-                >
+            {!isInsidePanel && isHovered &&(
+                <Tooltip visible={true} style={{ left: `${position}%` }}>
                     {value}
                 </Tooltip>
-            ) : null}
+            )}
+
+            {/* Category and Value display inside the panel (no hover) */}
+            {isInsidePanel && (
+                <div>
+                    <p style={{ marginTop: '40px' }}>Category: {category}</p>
+                    <p>Value: {value}</p>
+                </div>
+            )}
         </SlidingScaleContainer>
   );
 };

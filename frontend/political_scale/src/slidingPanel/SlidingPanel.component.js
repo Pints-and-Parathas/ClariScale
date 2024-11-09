@@ -6,7 +6,7 @@ const SlidingPanel = ({isOpen, onClose, children}) => {
         <PanelContainer isOpen={isOpen}>
             <CloseButton onClick={onClose}></CloseButton>
             <PanelContent>
-                <h2>Details</h2>
+                <h2 style={{ marginBottom: '40px' }}>Details</h2>
                 {children}
                 <p>Insert Details here fr fr.</p>
             </PanelContent>
