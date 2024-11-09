@@ -1,3 +1,5 @@
+import asyncio
+
 def join_json(json_object_1, json_object_2, fields):
     """
     Merges `json_object_2` into `json_object_1` by copying specified fields from `json_object_2`.
@@ -37,3 +39,17 @@ def join_json(json_object_1, json_object_2, fields):
             json_object_1[object_2_key] = object_2_value
 
     return json_object_1
+
+
+def run_async_tasks(*tasks):
+    try:
+        # Attempt to get the running loop
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        # No event loop, create a new one
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        return loop.run_until_complete(asyncio.gather(*tasks))
+    else:
+        # An event loop is already running, use asyncio.ensure_future
+        return loop.run_until_complete(asyncio.gather(*tasks))
