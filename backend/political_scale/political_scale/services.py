@@ -31,6 +31,17 @@ def fetch_article_data(url):
 
     try:
         response_json = json.loads(response.text)
+        
+        merged_data = {
+            "is_article": response_json.get("is_article", False),
+            "author": response_json.get("author", ""),
+            "title": response_json.get("title", ""),
+            "publish_date": response_json.get("publish_date", ""),
+        }
+
+        if not merged_data["is_article"]:
+            return JsonResponse({"is_article": False})
+
         outlet = response_json.get("outlet", "unknown outlet")
         article_text = response_json.get("text", "article text unavailable")
 
@@ -40,12 +51,6 @@ def fetch_article_data(url):
 
         outlet_json = json.loads(outlet_response)
         article_text_json = json.loads(article_text_response)
-
-        merged_data = {
-            "author": response_json.get("author", ""),
-            "title": response_json.get("title", ""),
-            "publish_date": response_json.get("publish_date", ""),
-        }
 
         merged_data = join_json(merged_data, outlet_json, ["summary", "score"])
         merged_data = join_json(merged_data, article_text_json, ["theme", "political_alignment", "reasoning", "overall_alignment"])

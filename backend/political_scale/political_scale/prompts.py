@@ -1,7 +1,9 @@
 FETCH_ARTICLE_DATA_PROMPT = """Using this html: {html_content}
     Extract information about the article, disregard anything that is an advert or a link to another article.
+    First set the boolean value based on whether the webpage is an article or not. If it isn't, stop processing and return immediately.
     Provide a response using this JSON scheme: 
     {{
+        "is_article": "bool",
         "author": "str",
         "outlet": "str",
         "title": "str",

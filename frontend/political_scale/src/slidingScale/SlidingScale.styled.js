@@ -6,7 +6,7 @@ export const SlidingScaleContainer = styled.div`
   flex-direction: column;
   justify-content: center; /* Center vertically */
   height: 100%; /* Ensure the container takes full height */
-  margin-top: -20px;
+  margin-top: -10px;
   z-index:1001;
 `;
 
@@ -56,11 +56,11 @@ export const SlidingScaleLabel = styled.label`
 //Styled component for the tooltip
 export const Tooltip = styled.div`
   position: absolute; /* Positioning to show it on top of the slider */
-  bottom: 0px; /* Position it above the slider */
-  left: 50%; /* Center horizontally */
+  bottom: 8px; /* Position it above the slider */
+  left: -60%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust for the center */
   background-color: transparent; /* Dark background for the tooltip */
-  color: #fff; /* White text for contrast */
+  color:  ${(props) => props.theme.thumbColor}; /* Bottom color of the triangle (thumb) */; /* White text for contrast */
 
   border-radius: 5px; /* Rounded corners */
   font-size: 10px; /* Smaller font size */
