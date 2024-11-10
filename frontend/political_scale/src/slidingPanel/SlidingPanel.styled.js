@@ -17,6 +17,7 @@ export const PanelContent = styled.div`
   padding: 20px;
   font-size: 16px;
   color: ${(props) => props.theme.color};
+  margin-left: 40px;
 `;
 
 export const CloseButton = styled.button`
