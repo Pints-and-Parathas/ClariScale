@@ -12,6 +12,9 @@ from concurrent.futures import ThreadPoolExecutor
 executor = ThreadPoolExecutor(max_workers=10)
 
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
+if not GEMINI_API_KEY:
+    raise EnvironmentError("GEMINI_API_KEY env variable is not set")
+
 genai.configure(api_key=GEMINI_API_KEY)
 model = genai.GenerativeModel("gemini-1.5-flash")
 
@@ -23,7 +26,7 @@ def get_data_from_prompt_api():
 
 
 def fetch_article_data(url):
-    page_html = requests.get(url)
+    page_html = requests.get(url, timeout=10)
     page_html.raise_for_status()
     html_content = page_html.content.decode('utf-8')
     prompt = FETCH_ARTICLE_DATA_PROMPT.format(html_content = extract_article_content(html_content))
@@ -51,13 +54,22 @@ def fetch_article_data(url):
 
         outlet_json = json.loads(outlet_response)
         article_text_json = json.loads(article_text_response)
+        print(article_text_json)
 
-        merged_data = join_json(merged_data, outlet_json, ["summary", "score"])
-        merged_data = join_json(merged_data, article_text_json, ["theme", "political_alignment", "reasoning", "overall_alignment"])
-
+        if article_text_json.get("error"):
+            return JsonResponse(article_text_json, status=500)
+        elif outlet_json.get("error"):
+            return JsonResponse(outlet_json, status=500)
+        
+        try:
+            merged_data = join_json(merged_data, outlet_json, ["summary", "score"])
+            merged_data = join_json(merged_data, article_text_json, ["theme", "political_alignment", "reasoning", "overall_alignment"])
+        except Exception as e:
+            return JsonResponse({"error": f"Article data could not be comined, Reason: {str(e)}"}, status=500)
+        
     except json.JSONDecodeError as e:
         print("error " + str(e))
-        merged_data = {"error": str(e)}
+        return JsonResponse({"error": f"error parsing JSON response {str(e)}"}, status=500)
     
     return JsonResponse(merged_data)
 
@@ -72,18 +84,37 @@ def get_data_from_sentiment_api():
 async def get_outlet_details(outlet_name):
     prompt = OUTLET_DETAILS_PROMPT.format(outlet_name = outlet_name)
     loop = asyncio.get_running_loop()
-    response = await loop.run_in_executor(None, model.generate_content, prompt)
-
-    return response.text
+    
+    try:
+        response = await asyncio.wait_for(
+            loop.run_in_executor(None, model.generate_content, prompt),
+            timeout=15
+        )
+        return response.text
+    
+    except asyncio.TimeoutError:
+        print("Timeout error when generating outlet details")
+        return json.dumps({"error": "Request to generate outlet details timed out"})
+    except Exception as e:
+        return json.dumps({"error": (f"Error retrieving outlet details: {e}")})
 
 
 async def get_text_analysis(article_text):
     prompt = TEXT_ANALYSIS_PROMPT.format(article_text = article_text)
-
     loop = asyncio.get_running_loop()
-    response = await loop.run_in_executor(None, model.generate_content, prompt)
-
-    return response.text
+    
+    try:
+        response = await asyncio.wait_for(
+            loop.run_in_executor(None, model.generate_content, prompt),
+            timeout=15
+        )
+        return response.text
+    
+    except asyncio.TimeoutError:
+        print("Timeout error when generating text analysis")
+        return json.dumps({"error": "Request to generate text analysis timed out"})
+    except Exception as e:
+        return json.dumps({"error": (f"Error retrieving article details: {e}")})
 
 
 def extract_article_content(html_content):
