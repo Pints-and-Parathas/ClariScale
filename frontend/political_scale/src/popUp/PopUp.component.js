@@ -34,7 +34,7 @@ const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
                 </PopupContainer>
             )}
             {isPanelOpen && (
-                <SlidingPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
+                <SlidingPanel onClose={() => setIsPanelOpen(false)}>
                     <SlidingScale category={category} value={value} isInsidePanel={true} />
                 </SlidingPanel>
             )}

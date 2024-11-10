@@ -2,8 +2,8 @@
 import React, {useState} from "react";
 import { PanelContainer,PanelContent, CloseButton } from "./SlidingPanel.styled";
 
-const SlidingPanel = ({isOpen, children}) => {
-    const [arrowState, setArrowState] = useState(isOpen); // Manage state locally
+const SlidingPanel = ({children}) => {
+    const [arrowState, setArrowState] = useState(true); // Manage state locally
   
     const togglePanel = () => {
       setArrowState(!arrowState); // Toggle the state on button click
