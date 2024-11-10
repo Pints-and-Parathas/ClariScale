@@ -1,12 +1,12 @@
-
 import React, {useState} from "react";
 import { PanelContainer,PanelContent, CloseButton } from "./SlidingPanel.styled";
 import { SettingsIcon } from "../colorSettings/ColorSettings.styled";
 import { FiSettings } from 'react-icons/fi';
 import ColorSettings from "../colorSettings/ColorSettings.component";
 
-const SlidingPanel = ({children}) => {
-    const [arrowState, setArrowState] = useState(true); // Manage state locally
+
+const SlidingPanel = ({isOpen, children, theme, toggleTheme, onClose}) => {
+    const [arrowState, setArrowState] = useState(isOpen); // Manage state locally
     const [showSettings, setShowSettings] = useState(false); // Track settings visibility
 
     const togglePanel = () => {
@@ -28,7 +28,7 @@ const SlidingPanel = ({children}) => {
                 <SettingsIcon onClick={toggleSettings}>
                     <FiSettings />
                 </SettingsIcon>
-                {showSettings && <ColorSettings />}
+                {showSettings && <ColorSettings toggleTheme={toggleTheme} theme={theme}/>}
             </PanelContainer>  
             <CloseButton isOpen={arrowState} onClick={togglePanel}>
                 <span className="arrow">➔</span> 

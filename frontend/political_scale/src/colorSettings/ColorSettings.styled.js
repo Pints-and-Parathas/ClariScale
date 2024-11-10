@@ -48,3 +48,27 @@ export const SettingsIcon = styled.div`
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 1006;
 `;
+
+export const ThemeModal = styled.div`
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1008;
+  width: 300px;
+  border-radius: 8px;
+  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+`;
+
+export const ThemeModalOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 1007;
+`;
