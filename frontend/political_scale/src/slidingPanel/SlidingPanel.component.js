@@ -2,7 +2,7 @@
 import React, {useState} from "react";
 import { PanelContainer,PanelContent, CloseButton } from "./SlidingPanel.styled";
 
-const SlidingPanel = () => {
+const SlidingPanel = ({children}) => {
     const [isOpen, setIsOpen] = useState(false); // Manage state locally
   
     const togglePanel = () => {
@@ -12,7 +12,8 @@ const SlidingPanel = () => {
         <>
             <PanelContainer isOpen={isOpen}>
                 <PanelContent>
-                    <h2>Details</h2>
+                    <h2 style={{ marginBottom: '40px' }}>Details</h2>
+                    {children}
                     <p>Insert Details here fr fr.</p>
                 </PanelContent>
             </PanelContainer>  

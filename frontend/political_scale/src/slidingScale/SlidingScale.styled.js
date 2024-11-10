@@ -64,7 +64,7 @@ export const Tooltip = styled.div`
 
   border-radius: 5px; /* Rounded corners */
   font-size: 10px; /* Smaller font size */
-  z-index: 1002; /* Ensure it's above the slider */
+  z-index: 1005; /* Ensure it's above the slider */
   white-space: nowrap; /* Prevent line breaks */
   visibility: ${props => (props.visible ? 'visible' : 'hidden')};
 `;
