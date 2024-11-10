@@ -8,20 +8,37 @@ import SlidingPanel from '../slidingPanel/SlidingPanel.component';
 
 const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
     const [isPanelOpen, setIsPanelOpen] = useState(false);
+    const [isPopUpVisible, setIsPopUpVisible] = useState(true);
+
     //If user not on article then no pop up
     if(!isArticle) return null;
 
+    const handleLearnMoreClick = () => {
+        console.log("Learn More clicked!");
+        setIsPanelOpen(true); // Open the panel
+        setIsPopUpVisible(false); // Hide the PopUp permanently
+    };
+    console.log("isPanelOpen:", isPanelOpen);
+
     return(
-        <PopupContainer>
-            <ToggleContainer>
-                <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-            </ToggleContainer>
-            <SlidingScale category={category} value={value} />
-            <LearnMoreLink onClick={() => setIsPanelOpen(true)}>
-                Learn More
-            </LearnMoreLink>
-            <SlidingPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)} />
-        </PopupContainer>
+        <>
+            {isPopUpVisible && (
+                <PopupContainer>
+                    <ToggleContainer>
+                        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
+                    </ToggleContainer>
+                    <SlidingScale category={category} value={value} isInsidePanel={false} />
+                <LearnMoreLink onClick={handleLearnMoreClick}>
+                        Learn More
+                    </LearnMoreLink>
+                </PopupContainer>
+            )}
+            {isPanelOpen && (
+                <SlidingPanel isOpen={isPanelOpen} onClose={() => setIsPanelOpen(false)}>
+                    <SlidingScale category={category} value={value} isInsidePanel={true} />
+                </SlidingPanel>
+            )}
+        </>
     );
 };
 

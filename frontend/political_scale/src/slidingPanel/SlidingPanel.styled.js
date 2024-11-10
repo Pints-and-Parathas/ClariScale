@@ -5,7 +5,7 @@ export const PanelContainer = styled.div`
   top: 0;
   right: 0;
   height: 100vh;
-  width: 300px; /* Width of the panel */
+  width: 450px; /* Width of the panel */
   background-color: ${(props) => props.theme.background}; /* Background color of the panel */
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   transform: ${(props) => (props.isOpen ? 'translateX(0)' : 'translateX(100%)')};
@@ -20,9 +20,12 @@ export const PanelContent = styled.div`
 `;
 
 export const CloseButton = styled.button`
-  position: fixed;  /* Position fixed to keep it outside the panel */
-  top: 20px;       /* Adjust the top position as needed */
-  right: ${(props) => (props.isOpen ? '300px' : '0px')}; /* Outside when closed, inside when open */
+  position: fixed;
+  top: 20px;
+  
+  /* Ensure the button stays visible even when the panel is closed */
+  right: ${(props) => (props.isOpen ? '460px' : '10px')}; /* Button positioning */
+  
   width: 30px;
   height: 30px;
   background-color: ${(props) => props.theme.background};
@@ -35,14 +38,13 @@ export const CloseButton = styled.button`
   justify-content: center;
   border-radius: 50%;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  z-index: 1007;
-
-  /* Rotate arrow based on open state */
-  transform: ${(props) => (props.isOpen ? 'rotate(180deg)' : 'rotate(0deg)')};
-  transition: transform 0.3s ease-in-out, right 0.3s ease-in-out;
-
-  &:before {
-    content: '➔';
-    font-size: 18px;
+  z-index: 1010;
+  font-size: 18px;
+  
+  /* Adjust the rotation of the arrow */
+  .arrow {
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    transform: ${(props) => (props.isOpen ? 'rotate(0deg)' : 'rotate(180deg)')};
   }
 `;
