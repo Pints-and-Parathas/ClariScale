@@ -48,10 +48,11 @@ export const ToggleSwitch = styled.label`
 `;
 
 export const ToggleContainer = styled.div`
-  position: absolute; /* Absolute positioning */
-  top: 10px;         /* Distance from the top */
-  right: 10px;       /* Distance from the right */
-  z-index: 1002;     /* Ensure it's above other elements */
+  position: relative; /* Use relative positioning to control placement below the text */
+  margin-top: -42px;   /* Add some margin to space it out below the theme settings */
+  left: 102%;          /* Center the container horizontally */
+  transform: translateX(-50%);  /* Offset the container by 50% of its width to center it */
+  z-index: 1002;      /* Ensure it's above other elements */
 `;
 
 
