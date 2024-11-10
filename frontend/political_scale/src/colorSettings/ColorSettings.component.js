@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { SettingsContainer, SettingsIcon } from "./ColorSettings.styled";
+import { SettingsWindow, OptionButton } from "./ColorSettings.styled";
 import ThemeToggle from '../themeToggle/ThemeToggle.component';
 import { ToggleContainer } from '../themeToggle/ThemeToggle.styled';
 import { FiSettings } from "react-icons/fi";
@@ -12,11 +12,10 @@ const ColorSettings = () => {
   };
 
   return (
-    <SettingsContainer>
-      <h3>Settings</h3>
-      <p>Option 1: Change Appearance</p>
-      <p>Option 2: Change Gradient</p>
-    </SettingsContainer>
+    <SettingsWindow>
+      <OptionButton>Change Appearance</OptionButton>
+      <OptionButton>Change Gradient</OptionButton>
+    </SettingsWindow>
   );
 };
 
