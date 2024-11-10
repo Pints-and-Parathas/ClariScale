@@ -9,18 +9,14 @@ import SlidingPanel from '../slidingPanel/SlidingPanel.component';
 const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
     const [isPopUpVisible, setIsPopUpVisible] = useState(true);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
-    const [hasPanelBeenOpened, setHasPanelBeenOpened] = useState(false);
     
 
     //If user not on article then no pop up
     if(!isArticle) return null;
 
     const handleLearnMoreClick = () => {
-        if (!hasPanelBeenOpened) {
-          setIsPopUpVisible(false);  // Hide the pop-up when "Learn More" is clicked
-          setIsPanelOpen(true);  // Open the panel
-          setHasPanelBeenOpened(true);  // Mark that the panel has been opened
-        }
+        setIsPopUpVisible(false); // Hide the pop-up*/
+        setIsPanelOpen(true); // Open the panel
       };
 
 
