@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { PopupContainer } from './PopUp.styled';
 import SlidingScale from '../slidingScale/SlidingScale.component';
-import ThemeToggle from '../themeToggle/ThemeToggle.component';
-import { ToggleContainer } from '../themeToggle/ThemeToggle.styled';
 import { LearnMoreLink } from '../moreDetailsLink/MoreDetailsLink.styled';
 import SlidingPanel from '../slidingPanel/SlidingPanel.component';
 
-const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
+const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
     const [isPopUpVisible, setIsPopUpVisible] = useState(true);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
     
@@ -20,13 +18,14 @@ const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
       };
 
 
+    const handleClosePanel = () => {
+        setIsPanelOpen(false); // Close the panel when the close button is clicked
+    };
+
     return(
         <>
             {isPopUpVisible && (
                 <PopupContainer>
-                    <ToggleContainer>
-                        <ThemeToggle theme={theme} toggleTheme={toggleTheme} />
-                    </ToggleContainer>
                     <SlidingScale category={category} value={value} isInsidePanel={false} />
                     <LearnMoreLink onClick={handleLearnMoreClick}>
                         Learn More
@@ -34,7 +33,12 @@ const PopUp = ({isArticle, category, value, theme, toggleTheme}) => {
                 </PopupContainer>
             )}
             {isPanelOpen && (
-                <SlidingPanel onClose={() => setIsPanelOpen(false)}>
+                <SlidingPanel
+                    isOpen={isPanelOpen} // Pass isPanelOpen to control visibility
+                    onClose={handleClosePanel} // Close panel when clicked
+                    theme={theme}
+                    toggleTheme={toggleTheme}
+                >
                     <SlidingScale category={category} value={value} isInsidePanel={true} />
                 </SlidingPanel>
             )}
