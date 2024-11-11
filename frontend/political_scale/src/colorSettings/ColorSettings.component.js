@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import { SettingsWindow, OptionButton, ThemeModal, ThemeModalOverlay } from "./ColorSettings.styled";
 import ThemeToggle from '../themeToggle/ThemeToggle.component';
 import { ToggleContainer } from "../themeToggle/ThemeToggle.styled";
@@ -11,10 +11,9 @@ const ColorSettings = ({theme, toggleTheme}) => {
     setIsThemeModalVisible(!isThemeModalVisible);
   };
 
-
   return (
     <>
-      <SettingsWindow>
+      <SettingsWindow >
         <OptionButton onClick={toggleThemeModal}>Change Appearance</OptionButton>
         <OptionButton>Change Gradient</OptionButton>
       </SettingsWindow>
