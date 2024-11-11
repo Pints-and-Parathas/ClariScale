@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { SlidingScaleContainer, SlidingScaleInput, SlidingScaleLabel, Tooltip } from './SlidingScale.styled'; 
 
-const SlidingScale = ({category, value, isInsidePanel}) => {
+const SlidingScale = ({category, value, isInsidePanel, gradient}) => {
     const [isHovered, setIsHovered] = useState(false);
 
     const sliderWidth = 100; // Width of the slider in percentage or pixels (adjust as needed)
@@ -21,6 +21,7 @@ const SlidingScale = ({category, value, isInsidePanel}) => {
             <SlidingScaleInput
                 value = {value}
                 disabled
+                style={{ background: gradient }}
             />
             {!isInsidePanel && isHovered &&(
                 <Tooltip visible={true} style={{ left: `${position}%` }}>

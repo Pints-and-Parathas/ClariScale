@@ -3,10 +3,12 @@ import { PopupContainer } from './PopUp.styled';
 import SlidingScale from '../slidingScale/SlidingScale.component';
 import { LearnMoreLink } from '../moreDetailsLink/MoreDetailsLink.styled';
 import SlidingPanel from '../slidingPanel/SlidingPanel.component';
+import ColorSettings from '../colorSettings/ColorSettings.component';
 
 const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
     const [isPopUpVisible, setIsPopUpVisible] = useState(true);
     const [isPanelOpen, setIsPanelOpen] = useState(false);
+    const [selectedGradient, setSelectedGradient] = useState("linear-gradient(45deg, #FFC312, #EE5A24)");
     
 
     //If user not on article then no pop up
@@ -26,7 +28,7 @@ const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
         <>
             {isPopUpVisible && (
                 <PopupContainer>
-                    <SlidingScale category={category} value={value} isInsidePanel={false} />
+                    <SlidingScale category={category} value={value} isInsidePanel={false} gradient={selectedGradient}/>
                     <LearnMoreLink onClick={handleLearnMoreClick}>
                         Learn More
                     </LearnMoreLink>
@@ -39,7 +41,8 @@ const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
                     theme={theme}
                     toggleTheme={toggleTheme}
                 >
-                    <SlidingScale category={category} value={value} isInsidePanel={true} />
+                    <SlidingScale category={category} value={value} isInsidePanel={true} gradient={selectedGradient} />
+                    <ColorSettings theme={theme} toggleTheme={toggleTheme} onGradientSelect={setSelectedGradient} />
                 </SlidingPanel>
             )}
         </> 
