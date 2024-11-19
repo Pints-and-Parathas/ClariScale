@@ -24,6 +24,10 @@ const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
         setIsPanelOpen(false); // Close the panel when the close button is clicked
     };
 
+    const handleGradientSelect = (newGradient) => {
+        setSelectedGradient(newGradient); // Update gradient
+    };
+
     return(
         <>
             {isPopUpVisible && (
@@ -40,9 +44,11 @@ const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
                     onClose={handleClosePanel} // Close panel when clicked
                     theme={theme}
                     toggleTheme={toggleTheme}
+                    selectedGradient={selectedGradient}
+                    onGradientSelect={setSelectedGradient}
                 >
                     <SlidingScale category={category} value={value} isInsidePanel={true} gradient={selectedGradient} />
-                    <ColorSettings theme={theme} toggleTheme={toggleTheme} onGradientSelect={setSelectedGradient} />
+                    <ColorSettings theme={theme} toggleTheme={toggleTheme} onGradientSelect={handleGradientSelect} />
                 </SlidingPanel>
             )}
         </> 

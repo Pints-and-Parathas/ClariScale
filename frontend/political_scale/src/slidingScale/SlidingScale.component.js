@@ -20,8 +20,8 @@ const SlidingScale = ({category, value, isInsidePanel, gradient}) => {
             {!isInsidePanel && <SlidingScaleLabel>{category}</SlidingScaleLabel>}
             <SlidingScaleInput
                 value = {value}
+                gradient={gradient}
                 disabled
-                style={{ background: gradient }}
             />
             {!isInsidePanel && isHovered &&(
                 <Tooltip visible={true} style={{ left: `${position}%` }}>

@@ -5,10 +5,14 @@ import { FiSettings } from 'react-icons/fi';
 import ColorSettings from "../colorSettings/ColorSettings.component";
 
 
-const SlidingPanel = ({isOpen, children, theme, toggleTheme, onClose}) => {
+const SlidingPanel = ({isOpen, children, theme, toggleTheme, onClose, onGradientSelect, selectedGradient}) => {
     const [arrowState, setArrowState] = useState(isOpen); // Manage state locally
     const [showSettings, setShowSettings] = useState(false); // Track settings visibility
     const settingsRef = useRef(null); //Reference for settings window
+
+    useEffect(() => {
+        setArrowState(isOpen);
+      }, [isOpen]);
 
     const togglePanel = () => {
       setArrowState(!arrowState); // Toggle the state on button click
@@ -55,7 +59,7 @@ const SlidingPanel = ({isOpen, children, theme, toggleTheme, onClose}) => {
                 </SettingsIcon>
                 {showSettings && (
                     <div ref={settingsRef}>
-                        <ColorSettings toggleTheme={toggleTheme} theme={theme}/>
+                        <ColorSettings toggleTheme={toggleTheme} theme={theme} onGradientSelect={onGradientSelect}/>
                     </div>
                 )}
             </PanelContainer>  

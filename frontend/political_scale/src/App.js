@@ -13,6 +13,9 @@ const value = 30;
 const App = () => {
   const [isArticle, setIsArticle] = useState(apiResponse);
   const [theme, setTheme] = useState('light');
+  const [selectedGradient, setSelectedGradient] = useState(
+    "linear-gradient(45deg, #FFC312, #EE5A24)"
+  );
 
   const toggleTheme = () =>{
     setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
@@ -24,7 +27,7 @@ const App = () => {
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle /> {/* Apply global styles */}
       <div className="App">
-        <PopUp isArticle={isArticle} category={category} value={value} theme={theme} toggleTheme={toggleTheme}/>
+        <PopUp isArticle={isArticle} category={category} value={value} theme={theme} toggleTheme={toggleTheme} selectedGradient={selectedGradient} setSelectedGradient={setSelectedGradient}/>
       </div>
     </ThemeProvider>
   );
