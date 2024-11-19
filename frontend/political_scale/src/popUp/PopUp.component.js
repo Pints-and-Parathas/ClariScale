@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { PopupContainer } from './PopUp.styled';
+import { PopupContainer, DismissButton } from './PopUp.styled';
 import SlidingScale from '../slidingScale/SlidingScale.component';
 import { LearnMoreLink } from '../moreDetailsLink/MoreDetailsLink.styled';
 import SlidingPanel from '../slidingPanel/SlidingPanel.component';
@@ -19,6 +19,10 @@ const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
         setIsPanelOpen(true); // Open the panel
       };
 
+    const handleDismissClick = () => {
+        setIsPopUpVisible(false); // Hide the pop-up*/
+      };
+
 
     const handleClosePanel = () => {
         setIsPanelOpen(false); // Close the panel when the close button is clicked
@@ -32,6 +36,7 @@ const PopUp = ({isArticle, category, value,theme,toggleTheme}) => {
         <>
             {isPopUpVisible && (
                 <PopupContainer>
+                    <DismissButton onClick={handleDismissClick}>x</DismissButton>
                     <SlidingScale category={category} value={value} isInsidePanel={false} gradient={selectedGradient}/>
                     <LearnMoreLink onClick={handleLearnMoreClick}>
                         Learn More
