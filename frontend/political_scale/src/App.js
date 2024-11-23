@@ -3,7 +3,7 @@ import PopUp from './popUp/PopUp.component';
 import GlobalStyle from './styles/GlobalStyle';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from './themeToggle/Theme';
-import SlidingPanel from './slidingPanel/SlidingPanel.component';
+
 
 
 const apiResponse = true;
