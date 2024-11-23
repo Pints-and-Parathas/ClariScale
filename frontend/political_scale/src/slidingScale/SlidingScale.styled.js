@@ -21,14 +21,7 @@ export const SlidingScaleInput = styled.input.attrs({ type: 'range' })`
   /* Track styling for Chrome */
   &::-webkit-slider-runnable-track {
     height: 10px; /* Height of the track */
-    background: linear-gradient(
-      90deg,
-      #ff0000 0%, 
-      #ff7f00 25%, 
-      #ffff00 50%, 
-      #00ff00 75%, 
-      #0000ff 100%
-    ); /* Gradient from red to blue */
+    background: ${(props) => props.gradient || 'transparent'};
     border-radius: 0; /* No rounded corners for a rectangular track */
   }
 
