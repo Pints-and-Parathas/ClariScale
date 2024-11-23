@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { PopupContainer, DismissButton } from './PopUp.styled';
 import SlidingScale from '../slidingScale/SlidingScale.component';
 import { LearnMoreLink } from '../moreDetailsLink/MoreDetailsLink.styled';
