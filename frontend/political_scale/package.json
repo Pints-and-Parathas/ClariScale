@@ -15,8 +15,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && cp ./manifest.json ./build/manifest.json && cp ./extension/icon.jpeg ./build/icon.jpeg && cp ./extension/content.js ./build/content.js && cp ./extension/background.js ./build/background.js",
     "test": "react-scripts test",
+    "build": "webpack --config webpack.config.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -36,5 +36,18 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.25.9",
+    "@babel/core": "^7.26.0",
+    "@babel/preset-env": "^7.26.0",
+    "@babel/preset-react": "^7.25.9",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.3",
+    "style-loader": "^4.0.0",
+    "webpack": "^5.96.1",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
   }
 }
