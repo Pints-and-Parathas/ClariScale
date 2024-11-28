@@ -17,7 +17,7 @@ def sentiment_api_view(request):
     
     return HttpResponse("Error", content_type="text/plain")
 
-
+@csrf_exempt
 def submit_webpage(request):
     if request.method == 'POST':
         try:
