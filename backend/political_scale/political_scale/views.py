@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .services import get_data_from_prompt_api, get_data_from_sentiment_api, fetch_article_data
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, JsonResponse
 import json
 
