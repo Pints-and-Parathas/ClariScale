@@ -22,11 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-vow1sft=ci*tal_$*!1_bfx_^%n%%(lvm$t*&_lg)e*@s1_u*n'
 
+ALLOWED_HOSTS = ['chrome-extension://mlbjhoppedlcbgnnpgmmjfgilnfdbdjc', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['chrome-extension://mlbjhoppedlcbgnnpgmmjfgilnfdbdjc']
+
+CORS_ORIGIN_ALLOW_ALL = True
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'political_scale',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'political_scale.restrict_to_extension.RestrictToExtensionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'political_scale.urls'
