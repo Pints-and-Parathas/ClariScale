@@ -17,3 +17,19 @@ chrome.runtime.sendMessage(
     }
   }
 );
+
+const appDiv = document.createElement("div");
+appDiv.id = "react-extension-container"; // This is where your app will be injected
+document.body.appendChild(appDiv);
+
+document.addEventListener("DOMContentLoaded", function () {
+  const script = document.createElement("script");
+  script.src = chrome.runtime.getURL("bundle.js"); // Path to the bundled React app
+
+  script.onload = function () {
+    console.log("bundle.js loaded successfully!");
+    // React in bundle.js will handle mounting to the div itself
+  };
+
+  document.body.appendChild(script); // Inject the script into the page
+});
