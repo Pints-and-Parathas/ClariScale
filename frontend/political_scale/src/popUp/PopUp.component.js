@@ -53,9 +53,6 @@ const PopUp = ({
           <LearnMoreLink href="#" onClick={handleLearnMoreClick}>
             Learn More
           </LearnMoreLink>
-          <h1>
-            {articleData ? articleData.articleTitle : "article data not found"}
-          </h1>
         </PopupContainer>
       )}
       {isPanelOpen && (
