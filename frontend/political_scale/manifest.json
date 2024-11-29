@@ -5,7 +5,6 @@
   "description": "A Chrome extension powered by React",
   "permissions": ["storage", "activeTab"],
   "action": {
-    "default_popup": "index.html",
     "default_icon": {
       "16": "icon.jpeg",
       "48": "icon.jpeg",
