@@ -6,7 +6,7 @@ import { lightTheme, darkTheme } from "./themeToggle/Theme";
 
 const apiResponse = true;
 const category = "Yo this dude!";
-const value = 30;
+//const value = 30;
 
 function parseArticleData(data) {
   // Destructure the main elements
@@ -57,6 +57,7 @@ const App = () => {
   const [isArticle, setIsArticle] = useState(apiResponse);
   const [articleData, setArticleData] = useState(null);
   const [theme, setTheme] = useState("light");
+  const [category, setCategory] = useState("");
   const [selectedGradient, setSelectedGradient] = useState(
     "linear-gradient(45deg, #FFC312, #EE5A24)"
   );
@@ -67,6 +68,17 @@ const App = () => {
 
   const currentTheme = theme === "light" ? lightTheme : darkTheme;
 
+    // Function to determine the category based on combinedScore
+    const getCategory = (combinedScore) => {
+      if (combinedScore >= 0 && combinedScore <= 100) {
+        if (combinedScore <= 20) return "Hard Left";
+        if (combinedScore <= 40) return "Left";
+        if (combinedScore <= 60) return "Center";
+        if (combinedScore <= 80) return "Right";
+        return "Hard Right"; // If score is between 81 and 100
+      }
+    };
+
   useEffect(() => {
     let isComponentMounted = true;
 
@@ -75,7 +87,9 @@ const App = () => {
       chrome.storage.local.get(["articleData"], (result) => {
         if (isComponentMounted) {
           if (result.articleData) {
-            setArticleData(parseArticleData(result.articleData));
+            const parsedData = parseArticleData(result.articleData);
+            setArticleData(parsedData);
+            setCategory(getCategory(parsedData.combinedScore));
           }
         }
       });
@@ -86,7 +100,9 @@ const App = () => {
     // Define the handler for the storage change event
     const handleStorageChange = (changes, areaName) => {
       if (areaName === "local" && changes.articleData && isComponentMounted) {
-        setArticleData(parseArticleData(changes.articleData.newValue));
+        const updatedData = parseArticleData(changes.articleData.newValue);
+        setArticleData(updatedData);
+        setCategory(getCategory(updatedData.combinedScore));
       }
     };
 
@@ -98,6 +114,7 @@ const App = () => {
     };
   }, []);
 
+
   return (
     <ThemeProvider theme={currentTheme}>
       <GlobalStyle /> {/* Apply global styles */}
@@ -105,7 +122,7 @@ const App = () => {
         <PopUp
           isArticle={isArticle}
           category={category}
-          value={value}
+          value={articleData ? articleData.combinedScore : null}
           theme={theme}
           toggleTheme={toggleTheme}
           selectedGradient={selectedGradient}

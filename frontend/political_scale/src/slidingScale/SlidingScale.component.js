@@ -17,14 +17,18 @@ const SlidingScale = ({category, value, isInsidePanel, gradient}) => {
                 onMouseEnter={() => !isInsidePanel && setIsHovered(true)}
                 onMouseLeave={() => !isInsidePanel && setIsHovered(false)}
         >        
-            {!isInsidePanel && <SlidingScaleLabel>{category}</SlidingScaleLabel>}
+            {!isInsidePanel && (
+                <SlidingScaleLabel>
+                Political Leaning : {category} {/* Display the "Political Leaning" label with the category */}
+                </SlidingScaleLabel>
+            )}
             <SlidingScaleInput
                 value = {value}
                 gradient={gradient}
                 disabled
             />
             {!isInsidePanel && isHovered &&(
-                <Tooltip visible={true} style={{ left: `${position}%` }}>
+                <Tooltip visible={true} style={{ left: `${position}%` }}  >
                     {value}
                 </Tooltip>
             )}
@@ -32,8 +36,8 @@ const SlidingScale = ({category, value, isInsidePanel, gradient}) => {
             {/* Category and Value display inside the panel (no hover) */}
             {isInsidePanel && (
                 <div>
-                    <p style={{ marginTop: '40px' }}>Category: {category}</p>
-                    <p>Value: {value}</p>
+                    <h2 style={{ marginTop: '40px' }}>Category : {category}</h2>
+                    <h2>Value : {value}</h2>
                 </div>
             )}
         </SlidingScaleContainer>
