@@ -5,7 +5,14 @@ import { LearnMoreLink } from "../moreDetailsLink/MoreDetailsLink.styled";
 import SlidingPanel from "../slidingPanel/SlidingPanel.component";
 import ColorSettings from "../colorSettings/ColorSettings.component";
 
-const PopUp = ({ isArticle, category, value, theme, toggleTheme }) => {
+const PopUp = ({
+  isArticle,
+  category,
+  value,
+  theme,
+  toggleTheme,
+  articleData,
+}) => {
   const [isPopUpVisible, setIsPopUpVisible] = useState(true);
   const [isPanelOpen, setIsPanelOpen] = useState(false);
   const [selectedGradient, setSelectedGradient] = useState(
