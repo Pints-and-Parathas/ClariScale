@@ -67,14 +67,14 @@ const App = () => {
 
   const currentTheme = theme === "light" ? lightTheme : darkTheme;
 
-    // Function to determine the category based on combinedScore
+  
     const getCategory = (combinedScore) => {
       if (combinedScore >= 0 && combinedScore <= 100) {
         if (combinedScore <= 20) return "Hard Left";
         if (combinedScore <= 40) return "Left";
         if (combinedScore <= 60) return "Center";
         if (combinedScore <= 80) return "Right";
-        return "Hard Right"; // If score is between 81 and 100
+        return "Hard Right"; 
       }
     };
 
@@ -116,7 +116,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={currentTheme}>
-      <GlobalStyle /> {/* Apply global styles */}
+      <GlobalStyle /> 
       <div className="App">
         <PopUp
           isArticle={isArticle}
