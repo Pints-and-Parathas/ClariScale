@@ -13,42 +13,26 @@ function parseArticleData(data) {
   const { article_info, author, is_article, outlet_info, publish_date, title } =
     data;
 
-  // Extract overall alignment
   const overallAlignment = article_info.overall_alignment;
 
-  // Extract themes
   const themes = article_info.themes.map((theme) => ({
     theme: theme.theme,
     politicalAlignment: theme.political_alignment,
     reasoning: theme.reasoning,
   }));
 
-  // Extract outlet information
   const outletAlignment = outlet_info.overall_alignment;
   const outletQuestions = outlet_info.questions.map((q) => ({
     score: q.score,
     summary: q.summary,
   }));
 
-  // Store other variables
   const isArticle = is_article;
   const publishDate = publish_date;
   const articleTitle = title;
 
-  // Author
   const articleAuthor = author;
 
-  // Log or use variables as needed
-  console.log("Overall Alignment:", overallAlignment);
-  console.log("Themes:", themes);
-  console.log("Outlet Alignment:", outletAlignment);
-  console.log("Outlet Questions:", outletQuestions);
-  console.log("Is Article:", isArticle);
-  console.log("Publish Date:", publishDate);
-  console.log("Title:", articleTitle);
-  console.log("Author:", articleAuthor);
-
-  // Return parsed data
   return {
     overallAlignment,
     themes,
