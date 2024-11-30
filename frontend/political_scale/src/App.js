@@ -10,8 +10,15 @@ const value = 30;
 
 function parseArticleData(data) {
   // Destructure the main elements
-  const { article_info, author, is_article, outlet_info, publish_date, title } =
-    data;
+  const {
+    article_info,
+    author,
+    is_article,
+    outlet_info,
+    publish_date,
+    title,
+    combined_score,
+  } = data;
 
   const overallAlignment = article_info.overall_alignment;
 
@@ -30,7 +37,7 @@ function parseArticleData(data) {
   const isArticle = is_article;
   const publishDate = publish_date;
   const articleTitle = title;
-
+  const combinedScore = combined_score;
   const articleAuthor = author;
 
   return {
@@ -42,6 +49,7 @@ function parseArticleData(data) {
     publishDate,
     articleTitle,
     articleAuthor,
+    combinedScore,
   };
 }
 
