@@ -3,8 +3,8 @@ import styled from "styled-components";
 // Styled components defined inline
 export const SettingsWindow = styled.div`
   position: absolute;
-  left: 12%;
-  top: 93%;
+  right: 10px;
+  top: 15%;
   transform: translateY(-50%); /* Center the window vertically */
   background-color: #fff;
   padding: 15px;
@@ -34,8 +34,8 @@ export const OptionButton = styled.button`
 
 export const SettingsIcon = styled.div`
   position: absolute;
-  left: 10px; /* Position it on the left side of the panel */
-  top: 95%; /* Vertically center it */
+  right: 10px; /* Position it on the left side of the panel */
+  top: 5%; /* Vertically center it */
   transform: translateY(-50%); /* Ensure it's centered vertically */
   cursor: pointer;
   font-size: 24px;

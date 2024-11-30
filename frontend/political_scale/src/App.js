@@ -20,7 +20,7 @@ function parseArticleData(data) {
     combined_score,
   } = data;
 
-  const overallAlignment = article_info.overall_alignment;
+  const articleAlignment = article_info.overall_alignment;
 
   const themes = article_info.themes.map((theme) => ({
     theme: theme.theme,
@@ -41,7 +41,7 @@ function parseArticleData(data) {
   const articleAuthor = author;
 
   return {
-    overallAlignment,
+    articleAlignment,
     themes,
     outletAlignment,
     outletQuestions,
