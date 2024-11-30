@@ -3,6 +3,7 @@ import requests
 import os
 import json
 import asyncio
+import math
 from bs4 import BeautifulSoup
 from .utils import join_json, run_async_tasks
 from django.http import JsonResponse
@@ -34,7 +35,10 @@ def fetch_article_data(url):
 
     try:
         response_json = json.loads(response.text)
-        
+
+        outlet = response_json.get("outlet", "unknown outlet")
+        article_text = response_json.get("text", "article text unavailable")
+
         merged_data = {
             "is_article": response_json.get("is_article", False),
             "author": response_json.get("author", ""),
@@ -45,21 +49,22 @@ def fetch_article_data(url):
         if not merged_data["is_article"]:
             return JsonResponse({"is_article": False})
 
-        outlet = response_json.get("outlet", "unknown outlet")
-        article_text = response_json.get("text", "article text unavailable")
-
         outlet_response, article_text_response = run_async_tasks(
             get_outlet_details(outlet), get_text_analysis(article_text)
         )
 
         outlet_json = json.loads(outlet_response)
         article_text_json = json.loads(article_text_response)
-        print(article_text_json)
 
         if article_text_json.get("error"):
             return JsonResponse(article_text_json, status=500)
         elif outlet_json.get("error"):
             return JsonResponse(outlet_json, status=500)
+        
+        combined_score = math.trunc((outlet_json.get('outlet_info', {}).get('overall_alignment', 0) + article_text_json.get('article_info', {}).get('overall_alignment', 0)) / 2)
+        print(outlet_json)
+        print(article_text_json.get('overall_alignment', 0))
+        merged_data["combined_score"] = combined_score
         
         try:
             merged_data = join_json(merged_data, outlet_json, ["summary", "score"])
@@ -72,14 +77,6 @@ def fetch_article_data(url):
         return JsonResponse({"error": f"error parsing JSON response {str(e)}"}, status=500)
     
     return JsonResponse(merged_data)
-
-def get_data_from_sentiment_api():
-    prompt = """Tell me whether the following sentence's sentiment is positive or negative or something in between.
-    Sentence Mint chocolate chip ice cream is da best.
-    """
-
-    response = model.generate_content(prompt)
-    return response.text
 
 async def get_outlet_details(outlet_name):
     prompt = OUTLET_DETAILS_PROMPT.format(outlet_name = outlet_name)
