@@ -53,10 +53,14 @@ const PopUp = ({
           <LearnMoreLink href="#" onClick={handleLearnMoreClick}>
             Learn More
           </LearnMoreLink>
+          <h1>
+            {articleData ? articleData.themes[0].theme : "article data not found"}
+          </h1>
         </PopupContainer>
       )}
       {isPanelOpen && (
         <SlidingPanel
+        articleData={articleData}
           isOpen={isPanelOpen} // Pass isPanelOpen to control visibility
           onClose={handleClosePanel} // Close panel when clicked
           theme={theme}
