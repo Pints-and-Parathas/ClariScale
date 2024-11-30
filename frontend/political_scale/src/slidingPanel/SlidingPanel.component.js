@@ -9,6 +9,7 @@ import { FiSettings } from "react-icons/fi";
 import ColorSettings from "../colorSettings/ColorSettings.component";
 
 const SlidingPanel = ({
+  articleData,
   isOpen,
   children,
   theme,
@@ -62,7 +63,15 @@ const SlidingPanel = ({
         <PanelContent>
           <h2 style={{ marginBottom: "40px" }}>Details</h2>
           {children}
-          <p>Insert Details here fr fr.</p>
+          <p style={{ marginBottom: "10px", fontWeight: 'bold', fontSize: '20px' }}>Article Details:</p>
+          {articleData?.themes?.map((theme, index) => (
+            <React.Fragment key={index}>
+              <p style={{ marginBottom: "10px", fontWeight: 'bold' }}>{theme.theme}</p>
+              <p style={{ marginBottom: "10px", fontStyle: 'italic' }}>Political Weighting: {theme.politicalAlignment}</p>
+              <p style={{ marginBottom: "40px" }}>{theme.reasoning}</p>
+            </React.Fragment>
+          )) || 'Article Data not found.'}
+
         </PanelContent>
         <SettingsIcon onClick={toggleSettings}>
           <FiSettings />
