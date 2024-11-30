@@ -5,8 +5,7 @@ import { ThemeProvider } from "styled-components";
 import { lightTheme, darkTheme } from "./themeToggle/Theme";
 
 const apiResponse = true;
-const category = "Yo this dude!";
-//const value = 30;
+
 
 function parseArticleData(data) {
   // Destructure the main elements
@@ -131,7 +130,6 @@ const App = () => {
         />
       </div>
     </ThemeProvider>
-    // <h1>We out here eating balls n shit</h1>
   );
 };
 

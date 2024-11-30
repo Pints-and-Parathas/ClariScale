@@ -19,7 +19,7 @@ const SlidingScale = ({category, value, isInsidePanel, gradient}) => {
         >        
             {!isInsidePanel && (
                 <SlidingScaleLabel>
-                Political Leaning : {category} {/* Display the "Political Leaning" label with the category */}
+                Political Leaning : {category} 
                 </SlidingScaleLabel>
             )}
             <SlidingScaleInput
