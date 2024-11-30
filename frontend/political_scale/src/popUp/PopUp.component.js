@@ -57,6 +57,7 @@ const PopUp = ({
       )}
       {isPanelOpen && (
         <SlidingPanel
+        articleData={articleData}
           isOpen={isPanelOpen} // Pass isPanelOpen to control visibility
           onClose={handleClosePanel} // Close panel when clicked
           theme={theme}

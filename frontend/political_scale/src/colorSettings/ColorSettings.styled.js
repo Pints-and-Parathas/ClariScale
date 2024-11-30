@@ -3,7 +3,7 @@ import styled from "styled-components";
 // Styled components defined inline
 export const SettingsWindow = styled.div`
   position: absolute;
-  left:-45%; /* Adjust position to the left of the settings icon */
+  left: 12%;
   top: 93%;
   transform: translateY(-50%); /* Center the window vertically */
   background-color: #fff;
@@ -60,7 +60,7 @@ export const ThemeModal = styled.div`
   z-index: 1008;
   width: 300px;
   border-radius: 8px;
-  display: ${(props) => (props.isVisible ? 'block' : 'none')};
+  display: ${(props) => (props.isVisible ? "block" : "none")};
 `;
 
 export const ThemeModalOverlay = styled.div`
