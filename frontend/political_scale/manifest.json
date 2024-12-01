@@ -1,15 +1,15 @@
 {
   "manifest_version": 3,
   "name": "Political Scale",
+  "key": "INSERT_KEY_HERE",
   "version": "1.0",
   "description": "A Chrome extension powered by React",
   "permissions": ["storage", "activeTab"],
-  "action": {
-    "default_icon": {
-      "16": "icon.jpeg",
-      "48": "icon.jpeg",
-      "128": "icon.jpeg"
-    }
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "background": {
     "service_worker": "background.js"
