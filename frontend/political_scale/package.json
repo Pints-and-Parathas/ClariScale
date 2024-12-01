@@ -16,7 +16,7 @@
   "scripts": {
     "start": "react-scripts start",
     "test": "react-scripts test",
-    "build": "webpack --config webpack.config.js && cp ./manifest.json ./build/manifest.json && cp ./extension/icon.jpeg ./build/icon.jpeg && cp ./extension/content.js ./build/content.js && cp ./extension/background.js ./build/background.js",
+    "build": "webpack --config webpack.config.js && cp ./manifest.json ./build/manifest.json && cp -r ./extension/icons ./build/icons && cp ./extension/content.js ./build/content.js && cp ./extension/background.js ./build/background.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
