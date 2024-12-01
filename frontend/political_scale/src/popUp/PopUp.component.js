@@ -22,7 +22,8 @@ const PopUp = ({
   //If user not on article then no pop up
   if (!isArticle) return null;
 
-  const handleLearnMoreClick = () => {
+  const handleLearnMoreClick = (e) => {
+    e.preventDefault();
     setIsPopUpVisible(false); // Hide the pop-up*/
     setIsPanelOpen(true); // Open the panel
   };
@@ -50,14 +51,19 @@ const PopUp = ({
             isInsidePanel={false}
             gradient={selectedGradient}
           />
-          <LearnMoreLink href="#" onClick={handleLearnMoreClick}>
+          <LearnMoreLink
+            href="#"
+            onClick={(e) => {
+              handleLearnMoreClick(e);
+            }}
+          >
             Learn More
           </LearnMoreLink>
         </PopupContainer>
       )}
       {isPanelOpen && (
         <SlidingPanel
-        articleData={articleData}
+          articleData={articleData}
           isOpen={isPanelOpen} // Pass isPanelOpen to control visibility
           onClose={handleClosePanel} // Close panel when clicked
           theme={theme}
