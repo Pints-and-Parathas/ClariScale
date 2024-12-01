@@ -26,24 +26,23 @@ const SlidingPanel = ({
   onGradientSelect,
   selectedGradient,
 }) => {
-  const [arrowState, setArrowState] = useState(isOpen); // Manage state locally
-  const [showSettings, setShowSettings] = useState(false); // Track settings visibility
-  const settingsRef = useRef(null); //Reference for settings window
+  const [arrowState, setArrowState] = useState(isOpen); 
+  const [showSettings, setShowSettings] = useState(false); 
+  const settingsRef = useRef(null); 
 
   useEffect(() => {
     setArrowState(isOpen);
   }, [isOpen]);
 
   const togglePanel = () => {
-    setArrowState(!arrowState); // Toggle the state on button click
+    setArrowState(!arrowState); 
   };
 
   const toggleSettings = () => {
-    setShowSettings(!showSettings); // Toggle the settings popup
+    setShowSettings(!showSettings); 
   };
 
   const handleClickOutside = (event) => {
-    // Close the settings if clicking outside it or toggling the settings icon
     if (
       settingsRef.current &&
       !settingsRef.current.contains(event.target) &&
@@ -53,7 +52,7 @@ const SlidingPanel = ({
     }
   };
 
-  // Attach event listener to close the settings on outside click
+  
   useEffect(() => {
     if (showSettings) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -62,7 +61,7 @@ const SlidingPanel = ({
     }
 
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside); // Clean up listener
+      document.removeEventListener("mousedown", handleClickOutside); 
     };
   }, [showSettings]);
 
