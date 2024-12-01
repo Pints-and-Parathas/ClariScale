@@ -1,6 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Political Scale",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj/qg4UB7ZximgdXBptkBZ2BxDTW4FpndUX2dYftXusw5mb//RAeG8JCY0Waxq2tWZwgc5+uvlPxjZBs01bWwmKHOAS/sknukDFCSp+r7aFIUA4lexoyTEf3NOeqMmH85G7jeI6cazdwoZyp3GZYuFw8IWv41saSwCSThpOQB7EqqIqGFRKtLwdx3BECY17eUlxWmQv32OHcM9i0vkmL68gUloFiPO6kfBPQewYUTgr1qgx8AQV2KH81RajKIwu4awFP4/6UM65fAXqIA2Fv22jhAGsaxjSthNZI+b47Es/LyHf5Mh12iaId5S7+/LMIhaXwYOAEQFdt/+IO9DUroWQIDAQAB",
   "version": "1.0",
   "description": "A Chrome extension powered by React",
   "permissions": ["storage", "activeTab"],
