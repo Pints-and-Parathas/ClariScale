@@ -1,9 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Political Scale",
-  "key": "INSERT_KEY_HERE",
+  "name": "ClariScale",
+  "key": "INSERT KEY HERE",
   "version": "1.0",
-  "description": "A Chrome extension powered by React",
+  "description": "A Chrome extension which shows you the political leaning of news articles at a glance",
   "permissions": ["storage", "activeTab"],
   "icons": {
     "16": "icons/icon16.png",
