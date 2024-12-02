@@ -3,7 +3,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
     console.log("Sending URL to API");
 
     // Make the fetch request to the API
-    fetch("http://127.0.0.1:8000/submit-article/", {
+    fetch("http://35.235.124.202:8000/submit-article/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
